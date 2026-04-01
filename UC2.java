@@ -1,57 +1,93 @@
-Book My Stay App
-This project presents the design and implementation of a Hotel Booking Management System to illustrate the practical application of Core Java and fundamental data structures in real-world scenarios. The system is developed incrementally, with each use case introducing a specific concept that addresses common software engineering challenges such as fair request handling, inventory consistency, and prevention of double-booking. By focusing on core logic and system behavior rather than user interface concerns, the project enables learners to understand not only how data structures are used, but why they are essential in scalable and maintainable software systems.
+/**
+ * UseCase2RoomInitialization.java
+ *
+ * This class demonstrates basic room modeling using abstraction,
+ * inheritance, and static availability representation.
+ *
+ * @author YourName
+ * @version 2.1
+ */
 
-Use Case 2: Basic Room Types & Static Availability
-Goal: Introduce object modeling through inheritance and abstraction before introducing data structures, allowing students to focus on domain design rather than optimization.
+// Abstract class representing a generic Room
+abstract class Room {
+    protected String roomType;
+    protected int numberOfBeds;
+    protected double pricePerNight;
 
-Actor: User – runs the application to view predefined room types and their availability.
+    // Constructor
+    public Room(String roomType, int numberOfBeds, double pricePerNight) {
+        this.roomType = roomType;
+        this.numberOfBeds = numberOfBeds;
+        this.pricePerNight = pricePerNight;
+    }
 
-Flow:
+    // Method to display room details
+    public void displayDetails() {
+        System.out.println("Room Type       : " + roomType);
+        System.out.println("Number of Beds  : " + numberOfBeds);
+        System.out.println("Price per Night : $" + pricePerNight);
+    }
+}
 
-User runs the application.
-Room objects representing different room types are created.
-Availability for each room type is stored using simple variables.
-Room details and availability information are printed to the console.
-Application terminates.
-Key Concepts Used
-Abstract Class - An abstract class is used to represent a generalized concept that should not be instantiated directly. The Room class defines common attributes and behavior shared by all room types while enforcing a consistent structure.
-Inheritance - Concrete room classes (SingleRoom, DoubleRoom, SuiteRoom) extend the abstract Room class. This allows shared properties to be reused while enabling specialization for each room type.
-Polymorphism - Room objects are referenced using the Room type, enabling uniform handling of different room implementations. This prepares the system for future extensibility without changing client code.
-Encapsulation - Room attributes such as number of beds, size, and price are encapsulated within the Room class. This ensures that room characteristics are controlled and modified only through defined behavior.
-Static Availability Representation - Room availability is stored using simple variables rather than data structures. This intentionally highlights the limitations of hardcoded and scattered state management.
-Separation of Domain and State - Room objects represent what a room is, while availability variables represent current system state. This distinction becomes critical when inventory management is introduced later.
-Key Requirements
-Define an abstract Room class with common attributes.
-Create concrete room classes for Single, Double, and Suite rooms.
-Initialize room objects in the application entry point.
-Store room availability using individual variables.
-Display room details and availability to the console.
-Key Benefits
-Clear introduction to object-oriented domain modeling
-Demonstrates inheritance and abstraction in a real-world context
-Establishes a strong foundation for later inventory refactoring
-Drawbacks of Previous Use Case
-Use Case 1 focused only on application startup and execution flow.
-No domain modeling or business concepts were introduced, limiting system realism.
-Please refer to the code snapshot below to write your code
+// Single Room class
+class SingleRoom extends Room {
 
-Note: Here the version is 2.1, because this is a refactored version. If you are going to make a new class, your version should be 2.0.
+    public SingleRoom() {
+        super("Single Room", 1, 100.0);
+    }
+}
 
-Please refer to the code snapshot below to write your code
+// Double Room class
+class DoubleRoom extends Room {
 
+    public DoubleRoom() {
+        super("Double Room", 2, 180.0);
+    }
+}
 
+// Suite Room class
+class SuiteRoom extends Room {
 
-Please refer to the code snapshot below to write your code
+    public SuiteRoom() {
+        super("Suite Room", 3, 300.0);
+    }
+}
 
+// Main application class
+public class UseCase2RoomInitialization {
 
+    public static void main(String[] args) {
 
-Please refer to the code snapshot below to write your code
+        System.out.println("=====================================");
+        System.out.println("   Welcome to Book My Stay App");
+        System.out.println("   Hotel Booking System v2.1");
+        System.out.println("=====================================\n");
 
+        // Create room objects (Polymorphism)
+        Room singleRoom = new SingleRoom();
+        Room doubleRoom = new DoubleRoom();
+        Room suiteRoom = new SuiteRoom();
 
+        // Static availability variables
+        int singleRoomAvailability = 5;
+        int doubleRoomAvailability = 3;
+        int suiteRoomAvailability = 2;
 
-Please refer to the code snapshot below to write your code
+        // Display Single Room Details
+        System.out.println("----- Single Room Details -----");
+        singleRoom.displayDetails();
+        System.out.println("Available Rooms : " + singleRoomAvailability + "\n");
 
+        // Display Double Room Details
+        System.out.println("----- Double Room Details -----");
+        doubleRoom.displayDetails();
+        System.out.println("Available Rooms : " + doubleRoomAvailability + "\n");
 
+        // Display Suite Room Details
+        System.out.println("----- Suite Room Details -----");
+        suiteRoom.displayDetails();
+        System.out.println("Available Rooms : " + suiteRoomAvailability + "\n");
 
-Please first compile the program using javac UseCase2RoomInitialization.java and run the Program using java UseCase2RoomInitialization as shown below
-
+        System.out.println("Thank you for using Book My Stay.");
+    }
+}
